@@ -1,3 +1,5 @@
+# Lab Week 01 Assignment, From CSE SYSU
+
 from typing import *
 
 
