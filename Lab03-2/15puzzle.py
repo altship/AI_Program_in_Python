@@ -78,7 +78,9 @@ class A_Star:
                 我们采用一维存储puzzle, 与二维坐标的对应可以用 (x = idx // dim, y = idx % dim)
             """
             for i, num in enumerate(curPuzzle):
-                if num != 0:
+                if num != 0:    # more specifically, you can always miss any other number beside 0 and it will still
+                    # work, but you can't miss more than one number, or these two(or more) numbers will not be
+                    # distinguishable and be put to the right place in most situation.
                     x, y = i // self.dim, i % self.dim
                     _x, _y = self.ePuzzleHash[num] // self.dim, self.ePuzzleHash[num] % self.dim
                     res += abs(x - _x) + abs(y - _y)
@@ -357,9 +359,9 @@ if __name__ == "__main__":
         2 - 曼哈顿距离
     """
     begin_time = time()
-    # solution = A_Star(bPuzzle=bPuzzle, spaceUnit=bPuzzle.index(0), ePuzzle=ePuzzle, dim=4, mode=0)
-    solution = IDA_Star(bPuzzle=bPuzzle, spaceUnit=bPuzzle.index(0), ePuzzle=ePuzzle, dim=int(math.sqrt(len(bPuzzle))),
-                        mode=2)
+    solution = A_Star(bPuzzle=bPuzzle, spaceUnit=bPuzzle.index(0), ePuzzle=ePuzzle, dim=4, mode=1)
+    # solution = IDA_Star(bPuzzle=bPuzzle, spaceUnit=bPuzzle.index(0), ePuzzle=ePuzzle, dim=int(math.sqrt(len(bPuzzle))),
+    #                     mode=2)
     solution.run()
     end_time = time()
     print("Search Time: {:.3f} s".format(end_time - begin_time))
